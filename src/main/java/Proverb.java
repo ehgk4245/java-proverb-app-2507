@@ -33,4 +33,41 @@ public class Proverb {
     public Long getId() {
         return id;
     }
+
+    public String toJson() {
+        return "{\n" +
+                "  \"id\": " + id + ",\n" +
+                "  \"content\": \"" + content + "\",\n" +
+                "  \"author\": \"" + author + "\"\n" +
+                "}";
+    }
+
+    public static Proverb fromJson(String json) {
+        Long id = null;
+        String content = null;
+        String author = null;
+
+        String[] lines = json.replace("{", "")
+                .replace("}", "")
+                .trim()
+                .split(",");
+
+        for (String line : lines) {
+            String[] pair = line.trim().split(":", 2);
+            if (pair.length != 2) continue;
+
+            String key = pair[0].trim().replace("\"", "");
+            String value = pair[1].trim();
+
+            value = value.replaceAll("^\"|\"$", "");
+
+            switch (key) {
+                case "id" -> id = Long.parseLong(value);
+                case "content" -> content = value;
+                case "author" -> author = value;
+            }
+        }
+
+        return new Proverb(id, content, author);
+    }
 }
