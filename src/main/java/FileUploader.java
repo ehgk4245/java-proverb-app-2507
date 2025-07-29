@@ -9,9 +9,9 @@ public class FileUploader {
     private final static String DEFAULT_FILE_PATH = "db/wiseSaying/";
     private final static String LAST_ID_PATH = DEFAULT_FILE_PATH + "lastId.txt";
 
-    public void saveProverb(Proverb proverb) {
-        Long id = proverb.getId();
-        String json = proverb.toJson();
+    public void saveWiseSaying(WiseSaying wiseSaying) {
+        Long id = wiseSaying.getId();
+        String json = wiseSaying.toJson();
 
         Path path = Path.of(DEFAULT_FILE_PATH + id + ".json");
         try {
@@ -21,18 +21,18 @@ public class FileUploader {
         }
     }
 
-    public Proverb loadProverb(Long id) {
+    public WiseSaying loadWiseSaying(Long id) {
         Path path = Path.of(DEFAULT_FILE_PATH + id + ".json");
         try {
             String json = Files.readString(path);
-            return Proverb.fromJson(json);
+            return WiseSaying.fromJson(json);
         } catch (IOException e) {
             System.err.println("파일 로드 중 오류 발생: " + e.getMessage());
             return null;
         }
     }
 
-    public List<Proverb> loadProverbs() {
+    public List<WiseSaying> saveWiseSayings() {
         try {
             return
                     Files.list(Path.of(DEFAULT_FILE_PATH))
@@ -40,7 +40,7 @@ public class FileUploader {
                             .map(path -> {
                                 try {
                                     String json = Files.readString(path);
-                                    return Proverb.fromJson(json);
+                                    return WiseSaying.fromJson(json);
                                 } catch (IOException e) {
                                     System.err.println("파일 로드 중 오류 발생: " + e.getMessage());
                                     return null;
@@ -74,7 +74,7 @@ public class FileUploader {
         }
     }
 
-    public void removeProverb(Long id) {
+    public void removeWiseSaying(Long id) {
         Path path = Path.of(DEFAULT_FILE_PATH + id + ".json");
         try {
             boolean deleted = Files.deleteIfExists(path);

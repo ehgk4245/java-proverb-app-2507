@@ -1,10 +1,10 @@
-public class Proverb {
+public class WiseSaying {
 
     private Long id;
     private String content;
     private String author;
 
-    public Proverb(Long id, String content, String author) {
+    public WiseSaying(Long id, String content, String author) {
         this.id = id;
         this.content = content;
         this.author = author;
@@ -42,7 +42,7 @@ public class Proverb {
                 "}";
     }
 
-    public static Proverb fromJson(String json) {
+    public static WiseSaying fromJson(String json) {
         Long id = null;
         String content = null;
         String author = null;
@@ -68,6 +68,6 @@ public class Proverb {
             }
         }
 
-        return new Proverb(id, content, author);
+        return new WiseSaying(id, content, author);
     }
 }
