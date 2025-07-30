@@ -21,6 +21,26 @@ public class FileUploader {
         }
     }
 
+    public void saveWiseSayings(List<WiseSaying> wiseSayings) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[\n");
+        for (int i = 0; i < wiseSayings.size(); i++) {
+            String json = wiseSayings.get(i).toJson();
+            if (i == wiseSayings.size() - 1) {
+                sb.append(json).append("\n");
+                break;
+            }
+            sb.append(json).append(",\n");
+        }
+        sb.append("]");
+        Path path = Path.of(DEFAULT_FILE_PATH + "data.json");
+        try {
+            Files.writeString(path, sb.toString());
+        } catch (IOException e) {
+            System.err.println("파일 저장 중 오류 발생: " + e.getMessage());
+        }
+    }
+
     public WiseSaying loadWiseSaying(Long id) {
         Path path = Path.of(DEFAULT_FILE_PATH + id + ".json");
         try {

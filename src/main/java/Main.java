@@ -29,6 +29,8 @@ public class Main {
             } else if (cmd.contains("수정?id=")) {
                 String[] split = cmd.split("=");
                 updateWiseSaying(Long.parseLong(split[1]));
+            } else if (cmd.equals("빌드")) {
+                buildWiseSayings();
             } else {
                 System.out.println("명령어를 다시 입력 해 주세요.");
             }
@@ -101,5 +103,11 @@ public class Main {
         findWiseSaying.setAuthor(author);
         fileUploader.saveWiseSaying(findWiseSaying);
         System.out.println("수정이 완료되었습니다.");
+    }
+
+    private static void buildWiseSayings() {
+        FileUploader fileUploader = new FileUploader();
+        fileUploader.saveWiseSayings(WISE_SAYINGS);
+        System.out.println("data.json 파일의 내용이 갱신되었습니다.");
     }
 }
