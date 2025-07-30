@@ -1,3 +1,5 @@
+import domain.wisesaying.entity.WiseSaying;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -56,7 +58,11 @@ public class FileUploader {
         try {
             return
                     Files.list(Path.of(DEFAULT_FILE_PATH))
-                            .filter(path -> path.toString().endsWith(".json"))
+                            .filter(path ->
+                                path.toString().endsWith(".json")
+                                &&
+                                !path.toString().contains("data")
+                            )
                             .map(path -> {
                                 try {
                                     String json = Files.readString(path);
