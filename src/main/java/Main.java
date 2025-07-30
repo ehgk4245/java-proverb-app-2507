@@ -40,7 +40,7 @@ public class Main {
 
     private static void init() {
         FileUploader fileUploader = new FileUploader();
-        List<WiseSaying> loaded = fileUploader.saveWiseSayings();
+        List<WiseSaying> loaded = fileUploader.loadWiseSayings();
         WISE_SAYINGS.addAll(loaded);
         id = fileUploader.loadLastId();
     }

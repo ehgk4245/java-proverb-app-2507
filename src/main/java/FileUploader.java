@@ -32,7 +32,7 @@ public class FileUploader {
         }
     }
 
-    public List<WiseSaying> saveWiseSayings() {
+    public List<WiseSaying> loadWiseSayings() {
         try {
             return
                     Files.list(Path.of(DEFAULT_FILE_PATH))
