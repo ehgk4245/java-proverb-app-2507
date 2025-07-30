@@ -26,11 +26,9 @@ public class App {
             } else if (cmd.equals("목록")) {
                 showWiseSayings();
             } else if (cmd.contains("삭제?id=")) {
-                String[] split = cmd.split("=");
-                deleteWiseSaying(Long.parseLong(split[1]));
+                deleteWiseSaying(cmd);
             } else if (cmd.contains("수정?id=")) {
-                String[] split = cmd.split("=");
-                updateWiseSaying(Long.parseLong(split[1]));
+                updateWiseSaying(cmd);
             } else if (cmd.equals("빌드")) {
                 build();
             } else {
@@ -82,7 +80,9 @@ public class App {
         WISE_SAYINGS.add(wiseSaying);
     }
 
-    private void deleteWiseSaying(Long id) {
+    private void deleteWiseSaying(String cmd) {
+        String[] split = cmd.split("=");
+        Long id = Long.parseLong(split[1]);
         boolean isRemoved = delete(id);
         if (isRemoved) {
             System.out.printf("%d번 명언이 삭제되었습니다.\n", id);
@@ -97,7 +97,9 @@ public class App {
         return WISE_SAYINGS.removeIf(wiseSaying -> wiseSaying.getId() == id);
     }
 
-    private void updateWiseSaying(Long id) {
+    private void updateWiseSaying(String cmd) {
+        String[] split = cmd.split("=");
+        Long id = Long.parseLong(split[1]);
         WiseSaying findWiseSaying = findById(id);
         if (findWiseSaying == null) {
             System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
