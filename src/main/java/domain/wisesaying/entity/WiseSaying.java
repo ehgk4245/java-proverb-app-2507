@@ -2,7 +2,7 @@ package domain.wisesaying.entity;
 
 public class WiseSaying {
 
-    private Long id;
+    private final Long id;
     private String content;
     private String author;
 

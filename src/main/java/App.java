@@ -23,26 +23,15 @@ public class App {
             Rq rq = new Rq(cmd);
 
             switch (rq.getActionName()) {
-                case "종료":
+                case "종료" -> {
                     break label;
-                case "등록":
-                    createWiseSaying();
-                    break;
-                case "목록":
-                    showWiseSayings();
-                    break;
-                case "삭제":
-                    deleteWiseSaying(rq);
-                    break;
-                case "수정":
-                    updateWiseSaying(rq);
-                    break;
-                case "빌드":
-                    build();
-                    break;
-                default:
-                    System.out.println("명령어를 다시 입력 해 주세요.");
-                    break;
+                }
+                case "등록" -> createWiseSaying();
+                case "목록" -> showWiseSayings();
+                case "삭제" -> deleteWiseSaying(rq);
+                case "수정" -> updateWiseSaying(rq);
+                case "빌드" -> build();
+                default -> System.out.println("명령어를 다시 입력 해 주세요.");
             }
 
         }

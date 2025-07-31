@@ -1,5 +1,6 @@
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Rq {
 
@@ -7,24 +8,19 @@ public class Rq {
     private final String actionName;
 
     public Rq(String cmd) {
-        paramsMap = new HashMap<>();
         String[] cmdBits = cmd.split("\\?", 2);
         actionName = cmdBits[0];
         String queryString = cmdBits.length > 1 ? cmdBits[1].trim() : "";
         
         String[] queryStringBits = queryString.split("&");
-        
-        for (String queryStringBit : queryStringBits) {
-            String[] queryParamBits = queryStringBit.split("=", 2);
-            String key = queryParamBits[0].trim();
-            String value = queryParamBits.length > 1 ? queryParamBits[1].trim() : "";
 
-            if (value.isEmpty()) {
-                continue;
-            }
-
-            paramsMap.put(key, value);
-        }
+        paramsMap = Arrays.stream(queryString.split("&"))
+                .map(part -> part.split("=", 2))
+                .filter(bits -> bits.length > 0 && !bits[0].trim().isEmpty() && !bits[1].trim().isEmpty())
+                .collect(Collectors.toMap(
+                        bits -> bits[0].trim(),
+                        bits -> bits[1].trim()
+                ));
     }
 
     public String getActionName() {
