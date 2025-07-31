@@ -102,7 +102,6 @@ public class App {
         Long id = Long.parseLong(split[1]);
         WiseSaying findWiseSaying = findById(id);
         if (findWiseSaying == null) {
-            System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
             return;
         }
         System.out.printf("명언(기존) : %s\n", findWiseSaying.getContent());
@@ -127,7 +126,10 @@ public class App {
         return WISE_SAYINGS.stream()
                 .filter(wiseSaying -> wiseSaying.getId() == id)
                 .findFirst()
-                .orElse(null);
+                .orElseGet(() -> {
+                    System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
+                    return null;
+                });
     }
 
     private void build() {
