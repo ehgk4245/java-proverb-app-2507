@@ -32,8 +32,18 @@ public class Rq {
     }
 
     public String getParam(String paramName, String defaultValue) {
+        if (paramsMap.containsKey(paramName)) return paramsMap.get(paramName);
+        return defaultValue;
+    }
+
+    public long getParamAsInt(String paramName, int defaultValue) {
         if (paramsMap.containsKey(paramName)) {
-            return paramsMap.get(paramName);
+            try {
+                return Integer.parseInt(paramsMap.get(paramName));
+            }
+            catch (NumberFormatException e) {
+                return -1;
+            }
         }
         return defaultValue;
     }

@@ -15,24 +15,34 @@ public class App {
 
         System.out.println("== 명언 앱 ==");
 
+        label:
         while (true) {
             System.out.print("명령) ");
             String cmd = input.nextLine().trim();
 
-            if (cmd.equals("종료")) {
-                break;
-            } else if (cmd.equals("등록")) {
-                createWiseSaying();
-            } else if (cmd.equals("목록")) {
-                showWiseSayings();
-            } else if (cmd.contains("삭제?id=")) {
-                deleteWiseSaying(cmd);
-            } else if (cmd.contains("수정?id=")) {
-                updateWiseSaying(cmd);
-            } else if (cmd.equals("빌드")) {
-                build();
-            } else {
-                System.out.println("명령어를 다시 입력 해 주세요.");
+            Rq rq = new Rq(cmd);
+
+            switch (rq.getActionName()) {
+                case "종료":
+                    break label;
+                case "등록":
+                    createWiseSaying();
+                    break;
+                case "목록":
+                    showWiseSayings();
+                    break;
+                case "삭제":
+                    deleteWiseSaying(rq);
+                    break;
+                case "수정":
+                    updateWiseSaying(rq);
+                    break;
+                case "빌드":
+                    build();
+                    break;
+                default:
+                    System.out.println("명령어를 다시 입력 해 주세요.");
+                    break;
             }
 
         }
@@ -80,9 +90,8 @@ public class App {
         WISE_SAYINGS.add(wiseSaying);
     }
 
-    private void deleteWiseSaying(String cmd) {
-        String[] split = cmd.split("=");
-        Long id = Long.parseLong(split[1]);
+    private void deleteWiseSaying(Rq rq) {
+        Long id = rq.getParamAsInt("id", -1);
         boolean isRemoved = delete(id);
         if (isRemoved) {
             System.out.printf("%d번 명언이 삭제되었습니다.\n", id);
@@ -97,9 +106,8 @@ public class App {
         return WISE_SAYINGS.removeIf(wiseSaying -> wiseSaying.getId() == id);
     }
 
-    private void updateWiseSaying(String cmd) {
-        String[] split = cmd.split("=");
-        Long id = Long.parseLong(split[1]);
+    private void updateWiseSaying(Rq rq) {
+        Long id = rq.getParamAsInt("id", -1);
         WiseSaying findWiseSaying = findById(id);
         if (findWiseSaying == null) {
             return;
