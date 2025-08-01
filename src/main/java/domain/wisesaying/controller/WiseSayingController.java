@@ -9,10 +9,10 @@ import java.util.Scanner;
 
 public class WiseSayingController {
     int lastId = 0;
-    private  final List<WiseSaying> wiseSayingList = new ArrayList<>();
+    private final List<WiseSaying> wiseSayingList = new ArrayList<>();
     private final Scanner scanner;
 
-    public WiseSayingController (Scanner scanner) {
+    public WiseSayingController(Scanner scanner) {
         this.scanner = scanner;
     }
 
