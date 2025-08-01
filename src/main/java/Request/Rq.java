@@ -27,11 +27,7 @@ public class Rq {
     }
 
     public String getParam(String paramName, String defaultValue) {
-        if (paramsMap.containsKey(paramName)) {
-            return paramsMap.get(paramName);
-        } else {
-            return defaultValue;
-        }
+        return paramsMap.getOrDefault(paramName, defaultValue);
     }
 
     public int getParamAsInt(String paramName, int defaultValue) {
