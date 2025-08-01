@@ -50,6 +50,7 @@ public class WiseSayingController {
         WiseSaying wiseSaying = wiseSayingService.findById(id);
 
         if (wiseSaying == null) {
+            System.out.println("해당 아이디는 존재하지 않습니다.");
             return;
         }
 
@@ -69,6 +70,7 @@ public class WiseSayingController {
         WiseSaying wiseSaying = wiseSayingService.findById(id);
 
         if (wiseSaying == null) {
+            System.out.println("해당 아이디는 존재하지 않습니다.");
             return;
         }
 
