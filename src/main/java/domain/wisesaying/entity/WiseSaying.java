@@ -2,11 +2,11 @@ package domain.wisesaying.entity;
 
 public class WiseSaying {
 
-    private final Long id;
+    private final int id;
     private String content;
     private String author;
 
-    public WiseSaying(Long id, String content, String author) {
+    public WiseSaying(int id, String content, String author) {
         this.id = id;
         this.content = content;
         this.author = author;
@@ -28,44 +28,7 @@ public class WiseSaying {
         this.content = content;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
-    }
-
-    public String toJson() {
-        return "{\n" +
-                "  \"id\": " + id + ",\n" +
-                "  \"content\": \"" + content + "\",\n" +
-                "  \"author\": \"" + author + "\"\n" +
-                "}";
-    }
-
-    public static WiseSaying fromJson(String json) {
-        Long id = null;
-        String content = null;
-        String author = null;
-
-        String[] lines = json.replace("{", "")
-                .replace("}", "")
-                .trim()
-                .split(",");
-
-        for (String line : lines) {
-            String[] pair = line.trim().split(":", 2);
-            if (pair.length != 2) continue;
-
-            String key = pair[0].trim().replace("\"", "");
-            String value = pair[1].trim();
-
-            value = value.replaceAll("^\"|\"$", "");
-
-            switch (key) {
-                case "id" -> id = Long.parseLong(value);
-                case "content" -> content = value;
-                case "author" -> author = value;
-            }
-        }
-
-        return new WiseSaying(id, content, author);
     }
 }
