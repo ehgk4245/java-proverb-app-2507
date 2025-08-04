@@ -1,6 +1,7 @@
 package domain.wisesaying.controller;
 
 import Request.Rq;
+import config.AppContext;
 import domain.wisesaying.entity.WiseSaying;
 import domain.wisesaying.service.WiseSayingService;
 
@@ -11,8 +12,8 @@ public class WiseSayingController {
     private final Scanner scanner;
     private final WiseSayingService wiseSayingService;
 
-    public WiseSayingController(Scanner scanner, WiseSayingService wiseSayingService) {
-        this.scanner = scanner;
+    public WiseSayingController(WiseSayingService wiseSayingService) {
+        this.scanner = AppContext.scanner;
         this.wiseSayingService = wiseSayingService;
     }
 

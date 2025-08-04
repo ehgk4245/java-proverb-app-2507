@@ -1,8 +1,7 @@
 import Request.Rq;
+import config.AppContext;
 import domain.system.controller.SystemController;
 import domain.wisesaying.controller.WiseSayingController;
-import domain.wisesaying.repository.WiseSayingRepository;
-import domain.wisesaying.service.WiseSayingService;
 
 import java.util.Scanner;
 
@@ -12,10 +11,8 @@ public class App {
     void run() {
         System.out.println("== 명언 앱 ==");
 
-        SystemController systemController = new SystemController();
-        WiseSayingRepository wiseSayingRepository = new WiseSayingRepository();
-        WiseSayingService wiseSayingService = new WiseSayingService(wiseSayingRepository);
-        WiseSayingController wiseSayingController = new WiseSayingController(scanner, wiseSayingService);
+        SystemController systemController = AppContext.getSystemController();
+        WiseSayingController wiseSayingController = AppContext.getWiseSayingController();
 
         outer:
         while (true) {
