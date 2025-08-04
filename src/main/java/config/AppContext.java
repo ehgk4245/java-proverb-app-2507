@@ -9,27 +9,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class AppContext {
-    public static final Scanner scanner = new Scanner(System.in);
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    public static final Scanner scanner;
+    public static final DateTimeFormatter FORMATTER;
 
-    private static SystemController systemController = new SystemController();
-    private static WiseSayingRepository wiseSayingRepository = new WiseSayingRepository();
-    private static WiseSayingService wiseSayingService = new WiseSayingService(wiseSayingRepository);
-    private static WiseSayingController wiseSayingController = new WiseSayingController(wiseSayingService);
+    public static final SystemController systemController;
+    public static final WiseSayingRepository wiseSayingRepository;
+    public static final WiseSayingService wiseSayingService;
+    public static final WiseSayingController wiseSayingController;
 
-    public static SystemController getSystemController() {
-        return systemController;
-    }
-
-    public static WiseSayingRepository getWiseSayingRepository() {
-        return wiseSayingRepository;
-    }
-
-    public static WiseSayingService getWiseSayingService() {
-        return wiseSayingService;
-    }
-
-    public static WiseSayingController getWiseSayingController() {
-        return wiseSayingController;
+    static {
+        scanner = new Scanner(System.in);
+        FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        systemController = new SystemController();
+        wiseSayingRepository = new WiseSayingRepository();
+        wiseSayingService = new WiseSayingService(wiseSayingRepository);
+        wiseSayingController = new WiseSayingController(wiseSayingService);
     }
 }
