@@ -2,27 +2,32 @@ package domain.wisesaying.repository;
 
 import domain.wisesaying.entity.WiseSaying;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.time.LocalDateTime.now;
 
 public class WiseSayingRepository {
 
     private int lastId = 0;
     private final List<WiseSaying> wiseSayingList = new ArrayList<>();
 
-    public WiseSaying write(String author, String content) {
-        WiseSaying wiseSaying = new WiseSaying(++lastId, author, content);
-        wiseSayingList.add(wiseSaying);
-        return wiseSaying;
-    }
-
     public void delete(WiseSaying wiseSaying) {
         wiseSayingList.remove(wiseSaying);
     }
 
-    public void modify(WiseSaying wiseSaying, String content, String author) {
-        wiseSaying.setContent(content);
-        wiseSaying.setAuthor(author);
+    public WiseSaying save(WiseSaying wiseSaying) {
+        LocalDateTime now = now();
+        if (wiseSaying.isNew()) {
+            wiseSaying.setCreateDateTime(now);
+            wiseSaying.setModifiedDateTime(now);
+            wiseSaying.setId(++lastId);
+            wiseSayingList.add(wiseSaying);
+            return wiseSaying;
+        }
+        wiseSaying.setModifiedDateTime(now);
+        return wiseSaying;
     }
 
     public WiseSaying findById(int id) {

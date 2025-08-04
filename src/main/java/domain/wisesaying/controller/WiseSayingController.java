@@ -29,13 +29,13 @@ public class WiseSayingController {
     }
 
     public void actionList() {
-        System.out.println("번호 / 작가 / 명언");
+        System.out.println("번호 / 작가 / 명언 / 작성 / 수정");
         System.out.println("----------------------");
         List<WiseSaying> wiseSayingList = wiseSayingService.getWiseSayingList();
 
         for (int i = wiseSayingList.size() - 1; i >= 0; i--) {
             WiseSaying wiseSaying = wiseSayingList.get(i);
-            System.out.printf("%d / %s / %s%n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent());
+            System.out.printf("%d / %s / %s / %s / %s%n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent(), wiseSaying.getCreateDateTime(), wiseSaying.getModifiedDateTime());
         }
     }
 
